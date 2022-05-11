@@ -1,0 +1,222 @@
+<!--END-->
+<!--END--><!DOCTYPE html><!--[if IE 7]>
+<html class="ie7" lang="ru">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie8" lang="ru">
+<![endif]-->
+<!--[if IE 9]>
+<html class="ie9" lang="ru">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
+<head>
+    <title>Profile</title>
+    <meta name="description" content="Описание страницы"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <!--meta( http-equiv="cache-control" content="no-cache")-->
+    <!--meta( http-equiv="expires" content="0")-->
+    <!--link(rel="preload" href="assets/css/extra.min.css?v=" + version as="style" crossorigin="anonymous")-->
+   <!-- <link href="favicon.ico" rel="shortcut icon"/>-->
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-SemiBold.woff2" as="font" crossorigin="anonymous"/>
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Light.woff2" as="font" crossorigin="anonymous"/>
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Medium.woff2" as="font" crossorigin="anonymous"/>
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-ExtraBold.woff2" as="font" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/assets/css/fonts.min.css?v=45744385"/>
+    <link rel="stylesheet" href="/assets/css/basic.min.css?v=45744385"/>
+    <link rel="stylesheet" href="/assets/css/extra.min.css?v=45744385"/>
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script defer="defer" src="/assets/js/scripts.min.js?v=45744385"></script>
+</head>
+<body class="Site">
+<!--if lt IE 8
+p.error-browser
+    | Ваш браузер&nbsp;
+    em устарел!&nbsp;
+    a(href="http://browsehappy.com/") Выберите новую версию
+        +s
+        | браузера здесь&nbsp;
+    | для правильного отображения сайта.
+-->
+<header class="Header" th:replace="~{fragments/common_header_fragment :: head}"></header>
+
+<div class="Middle">
+    <div class="Middle-top">
+        <div class="wrap">
+            <h1 class="Middle-title">Account management
+            </h1>
+        </div>
+    </div>
+    <div class="wrap">
+        <main class="Middle-main">
+            <h2 class="Middle-title">My profile
+            </h2>
+            <span style="color: green" th:if="${paid}"
+                  th:text="'Аккаунт успешно пополнен на сумму: ' + ${amount} + ' рублей.'">Accound succesfully paid!</span>
+            <span style="color: red" th:if="${failedPayment}" th:text="'Введите корректную сумму пополнения счета'">Input error!</span>
+            <span style="color: green" th:if="${dataUpdated}">Confirmation link sent!</span>
+            <span style="color: red" th:if="${noChangesNeed}">No data to change!</span>
+            <span style="color: green" th:if="${profileChange}">Updated!</span>
+            <span style="color: red" th:if="${profileChangeFalse}">Old link!</span>
+            <div class="Tabs Tabs_default">
+                <!--+Tabs-links([-->
+                <!--    ['#basic', 'Основные сведения'],-->
+                <!--    ['#transactions','История транзакций'],-->
+                <!--    ['#topup','Пополнить счет']-->
+                <!--], 'text', 0)-->
+                <div class="Tabs-links"><a class="Tabs-link Tabs-link_ACTIVE" href="#basic">General information</a><a
+                        class="Tabs-link" href="#transactions">Transaction history</a><a class="Tabs-link" href="#topup">Fill the money up</a>
+                </div>
+                <div class="Tabs-wrap">
+                    <div class="Tabs-block" id="basic">
+                        <div class="Profile">
+                            <form class="form Profile-form" action="#" th:action="@{/profile/save}" method="post">
+                                <div class="row">
+                                    <div class="row-block">
+                                        <div class="form-group">
+                                            <label class="form-label" for="name">Name
+                                            </label>
+                                            <input class="form-input" id="name" name="name" type="text"
+                                                   th:value="${curUsr.name}"
+                                                   th:name="userName"
+                                                   value="Михаил"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="mail">E-mail
+                                            </label>
+                                            <input class="form-input" id="mail" name="mail" type="text"
+                                                   th:value="${curUsr.email}"
+                                                   th:name="userEmail"
+                                                   value="addr@sait.com"
+                                                   data-validate="require mail"/>
+                                            <div class="Profile-btn Profile-btn_confirm">
+                                                <button class="btn btn_primary" type="button">Confirm
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="phone">Phone
+                                            </label>
+                                            <input class="form-input" id="phone" name="phone" type="text"
+                                                   th:value="${curUsr.phone}"
+                                                   th:name="userPhone"
+                                                   value="+70000000000"
+                                                   data-mask="+7 (999) 999-99-99" data-validate="require"/>
+                                            <div class="Profile-btn Profile-btn_confirm">
+                                                <button class="btn btn_primary" type="button">Confirm
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row-block">
+                                        <div class="form-group">
+                                            <label class="form-label" for="password">Password
+                                            </label>
+                                            <input class="form-input" id="password" name="password" type="password"
+                                                   th:name="userPassword1"
+                                                   placeholder="Тут можно изменить пароль"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="passwordReply">Confirm password
+                                            </label>
+                                            <input class="form-input" id="passwordReply" name="passwordReply"
+                                                   type="password"
+                                                   th:name="userPassword2"
+                                                   placeholder="Введите пароль повторно"/>
+                                        </div>
+                                        <span style="color: red" th:if="${passwordChangeMatch}"
+                                              th:text="${passwordChangeMatchText}">Password mismatch!</span>
+
+                                        <div class="form-group">
+                                            <div class="Profile-btn">
+                                                <button class="btn btn_danger" type="button" th:href="@{/profile}">
+                                                    Decline
+                                                </button>
+                                                <button class="btn btn_primary" type="submit">Save changes
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="Tabs-block" id="transactions">
+                        <div class="Transactions">
+                            <div class="tableWrap">
+                                <table class="table table_noMargin">
+                                    <thead>
+                                    <tr>
+                                        <th>Date and time
+                                        </th>
+                                        <th>Summ
+                                        </th>
+                                        <th>Description
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <tr th:each="transact:${transactions}">
+                                        <td th:text="${transact.time}">15 мая 2017 10:03
+                                        </td>
+                                        <td><span class="Transactions_textSuccess">
+                            <strong th:text="${transact.value}">+500 р.
+                            </strong></span>
+                                        </td>
+                                        <td th:text="${transact.description}">Пополнение счета
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="Transactions-footer Transactions-footer_center"><a
+                                    class="btn btn_primary Transactions-get" href="#" data-transactionoffset="4"
+                                    data-transactionlimit="10" data-transactionsort="asc">Show more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Tabs-block" id="topup">
+                        <form class="form Topup" action="#" method="post" data-sendHash="34534535"
+                              th:action="@{/payment}">
+                            <div class="Topup-wrap">
+                                <strong class="Topup-title">Input summ to fill up account:
+                                </strong>
+                                <div class="form-group form-group_row Topup-group">
+                                    <input class="form-input" id="sum" name="sum" type="text" th:name="sum"/><span>RUB</span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="Topup-btn">
+                                        <button class="btn btn_primary">Payment
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<footer class="Footer" th:replace="~{fragments/common_footer_fragment :: footer}"></footer>
+
+<script src="/assets/plg/jQuery/jquery-3.5.1.min.js"></script>
+<!--+menu(-->
+<!--    'Это раз',-->
+<!--    'Это два',-->
+<!--    'Это три'-->
+<!--)-->
+<!--br-->
+<!--br-->
+<!--+menu._vt-->
+<!--    +menuItem Это раз-->
+<!--    +menuItem.-item_danger Это два-->
+<!--    +menuItem Это три-->
+</body>
+</html>
