@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Download files</title>
+</head>
+<body>
+<div align="center">
+
+    <h1>Download file:</h1>
+
+    <table id="files">
+        <tr>
+            <th>Name</th>
+
+        </tr>
+        <tr th:each="file : ${fileList}">
+            <td align="center">
+                <a th:href="|${tompath + file.getFileName()}|"><span th:text="${file.getFileName()}"></span></a>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <br>
+
+    <form method="get" th:action="@{/books/shelf}">
+        <table>
+            <tr>
+                <td>
+                    <input type="submit" value="Go to books shelf">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>
