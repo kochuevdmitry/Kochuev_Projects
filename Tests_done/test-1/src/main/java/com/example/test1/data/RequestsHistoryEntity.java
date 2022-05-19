@@ -1,9 +1,12 @@
 package com.example.test1.data;
 
+import io.swagger.annotations.ApiModel;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "requests_history")
+@ApiModel(description = "entity representing a history of FX exchange requests")
 public class RequestsHistoryEntity {
 
     @Id

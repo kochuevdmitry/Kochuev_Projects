@@ -26,7 +26,7 @@ public class ExchangeRequestsController {
     }
 
     @GetMapping("/exchange")
-    @ApiOperation("request fx, value and output fx to get conversion")
+    @ApiOperation("request fx, value and output fx to get conversion, inputFX and outputFX 3 letter FX codes like USD and EUR")
     public ResponseEntity<RequestsHistoryEntity> booksByAuthor(@RequestParam("userId") int userId, @RequestParam("value") double value,
                                                                @RequestParam("inputFX") String inputFX, @RequestParam("outputFX") String outputFX) {
         return ResponseEntity.ok(exchangeService.getExchangeData(userId, value, inputFX, outputFX));

@@ -4,5 +4,5 @@
 
     <include file="/db/changelog/liquibase-outputChangeLog.init.xml"/>
     <include file="migration.xml" relativeToChangelogFile="true"/>
-
+    <include file="db/changelog/liquibase-outputChangeLog.post_migration.xml"/>
 </databaseChangeLog>

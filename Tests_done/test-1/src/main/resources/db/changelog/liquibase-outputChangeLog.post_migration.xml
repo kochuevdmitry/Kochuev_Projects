@@ -3,23 +3,7 @@
 
     <changeSet id="dkochuev" author="after migration changeset to update id counters">
         <sql>
-            select setval('books_id_seq', (select max(id) from books));
-            select setval('book2author_id_seq', (select max(id) from book2author));
-            select setval('book2user_id_seq', (select max(id) from book2user));
-            select setval('book_view_history_id_seq', (select max(id) from book_view_history));
-            select setval('book_review_id_seq', (select max(id) from book_review));
-            select setval('book_review_like_id_seq', (select max(id) from book_review_like));
-            select setval('message_id_seq', (select max(id) from message));
-            select setval('users_id_seq', (select max(id) from users));
-            select setval('authors_id_seq', (select max(id) from authors));
-            select setval('genre_id_seq', (select max(id) from genre));
-            select setval('tags_id_seq', (select max(id) from tags));
-            select setval('user_role_id_seq', (select max(id) from user_role));
-            select setval('book2genre_id_seq', (select max(id) from book2genre));
-            select setval('review_likes_id_seq', (select max(id) from review_likes));
-            select setval('review_dislikes_id_seq', (select max(id) from review_dislikes));
-            select setval('book2tag_id_seq', (select max(id) from book2tag));
-
+            select setval('requests_history_id_seq', (select max(id) from requests_history));
         </sql>
     </changeSet>
 </databaseChangeLog>

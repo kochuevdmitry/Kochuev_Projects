@@ -1,0 +1,142 @@
+swagger: '2.0'
+info:
+  description: API for FX exchange test1
+  version: '1.0'
+  title: FX exchange test1 API
+  termsOfService: http://localhost:8086/
+  contact:
+    name: API owner
+    url: http://localhost:8086/
+    email: owner@rmailer.org
+  license:
+    name: api_license
+    url: http://localhost:8086/
+host: localhost:8086
+basePath: /
+tags:
+  - name: exchange-requests-controller
+    description: Exchange Requests Controller
+paths:
+  /api/exchange:
+    get:
+      tags:
+        - exchange-requests-controller
+      summary: request fx, value and output fx to get conversion
+      operationId: booksByAuthorUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: inputFX
+          in: query
+          description: inputFX
+          required: true
+          type: string
+        - name: outputFX
+          in: query
+          description: outputFX
+          required: true
+          type: string
+        - name: userId
+          in: query
+          description: userId
+          required: true
+          type: integer
+          format: int32
+        - name: value
+          in: query
+          description: value
+          required: true
+          type: number
+          format: double
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RequestsHistoryEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/stats/above_usd_value/:
+    get:
+      tags:
+        - exchange-requests-controller
+      summary: request all user ids with transaction above provided value.
+      operationId: aboveUsdValueUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: value
+          in: query
+          description: value
+          required: true
+          type: number
+          format: double
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int32
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/stats/summ_above_usd_value/:
+    get:
+      tags:
+        - exchange-requests-controller
+      summary: request all user ids with summ of transactions above provided value.
+      operationId: summAboveUsdValueUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: value
+          in: query
+          description: value
+          required: true
+          type: number
+          format: double
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int32
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+definitions:
+  RequestsHistoryEntity:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      outputFX:
+        type: string
+      outputValue:
+        type: number
+        format: double
+      requestFX:
+        type: string
+      requestValue:
+        type: number
+        format: double
+      success:
+        type: boolean
+      userId:
+        type: integer
+        format: int32
+    title: RequestsHistoryEntity
