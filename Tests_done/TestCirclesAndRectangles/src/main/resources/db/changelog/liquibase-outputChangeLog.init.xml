@@ -1,0 +1,30 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+
+    <changeSet author="Kochuev.Dmitry (generated)" id="1653391789235-1">
+        <createSequence sequenceName="circles_id_seq"/>
+    </changeSet>
+    <changeSet author="Kochuev.Dmitry (generated)" id="1653391789235-2">
+        <createSequence sequenceName="rectangles_id_seq"/>
+    </changeSet>
+    <changeSet author="Kochuev.Dmitry (generated)" id="1653391789235-3">
+        <createTable tableName="circles">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="circles_pkey"/>
+            </column>
+            <column name="color" type="INT"/>
+            <column name="radius" type="FLOAT8"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Kochuev.Dmitry (generated)" id="1653391789235-4">
+        <createTable tableName="rectangles">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="rectangles_pkey"/>
+            </column>
+            <column name="color" type="INT"/>
+            <column name="side1" type="FLOAT8"/>
+            <column name="side2" type="FLOAT8"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

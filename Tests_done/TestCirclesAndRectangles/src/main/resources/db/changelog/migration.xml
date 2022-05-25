@@ -1,0 +1,22 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="dkochuev" author="initial migration">
+        <sql>
+            INSERT INTO public.rectangles (id,color,side1,side2) VALUES (1,0,1.0,2.0);
+            INSERT INTO public.rectangles (id,color,side1,side2) VALUES (2,1,2.0,1.0);
+            INSERT INTO public.rectangles (id,color,side1,side2) VALUES (3,1,3.0,3.0);
+            INSERT INTO public.rectangles (id,color,side1,side2) VALUES (4,0,4.56,2.0);
+            INSERT INTO public.rectangles (id,color,side1,side2) VALUES (5,2,1.0,22.0);
+            INSERT INTO public.rectangles (id,color,side1,side2) VALUES (6,2,22.0,22.5);
+            INSERT INTO public.circles (id,color,radius) VALUES (1,1,2.0);
+            INSERT INTO public.circles (id,color,radius) VALUES (6,1,3.0);
+            INSERT INTO public.circles (id,color,radius) VALUES (7,0,22.0);
+            INSERT INTO public.circles (id,color,radius) VALUES (8,2,5.4);
+            INSERT INTO public.circles (id,color,radius) VALUES (9,0,5.4565);
+
+        </sql>
+    </changeSet>
+</databaseChangeLog>
