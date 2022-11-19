@@ -19,9 +19,7 @@ public class StatisticStorage {
     }
 
     public TreeMap<Character, StatDto> getStatisticsData(){
-        synchronized (STATISTIC) {
             return STATISTIC;
-        }
     }
 
 }
